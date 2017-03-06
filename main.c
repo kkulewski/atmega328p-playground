@@ -9,11 +9,11 @@ int main(void)
 {
 	// PIN MODE: 1 - OUT, 0 - IN
 	// PB0 =  as output
-	DDRB = 0b00000001;
-	// PCx = as input
-	DDRC = 0b00000000;
-	// turn off pull-up resistors on PCx
-	PORTC = 0b00000000;
+	DDRB |= 0b00000001;
+	// PC0 = as input
+	DDRC &= 0b11111110;
+	// turn off pull-up resistors on PC0
+	PORTC &= 0b11111110;
 	
     while (1) 
     {
@@ -21,15 +21,15 @@ int main(void)
 		if((PINC & 0b00000001) == 1)
 		{
 			// set PB0 HIGH
-			PORTB = 0b00000001;
+			PORTB |= 0b00000001;
 		}
 		else
 		{
 			// set PB0 LOW
-			PORTB = 0b00000000;
+			PORTB &= 0b11111110;
 		}
 		// wait 100 miliseconds
-		_delay_ms(100);		
+		_delay_ms(200);		
     }
 }
 
